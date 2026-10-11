@@ -1,60 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ya! Music Chris</title>
-    <link rel="icon" href="https://yamusicchris.github.io/C.png" type="image/x-icon">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #121212;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-        button {
-            margin: 1rem;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            background-color: #1DB954;
-            color: #fff;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: #17a44b;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="Welcome to Ya! Music Chris. Selecciona tu idioma y disfruta de una experiencia musical inolvidable.">
+
+  <title>Ya! Music Chris</title>
+
+  <link
+    rel="icon"
+    href="https://yamusicchris.github.io/C.png"
+    type="image/png"
+  >
+
+  <style>
+    /* =========================
+       VARIABLES Y BASE
+    ========================= */
+
+    :root {
+      color-scheme: dark;
+      --bg: #09090d;
+      --surface: #111118;
+      --text: #f7f7fb;
+      --muted: #a1a1b3;
+      --accent: #b7ff3c;
+      --border: rgba(255, 255, 255, .1);
+      --container: 1180px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 5px;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    /* =========================
+       ENCABEZADO
+    ========================= */
+
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand img {
+      display: block;
+      width: 148px;
+      max-height: 44px;
+      object-fit: contain;
+    }
+
+    /* =========================
+       SELECTOR DE IDIOMA
+    ========================= */
+
+    .language-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 0;
+      background:
+        radial-gradient(
+          ellipse at 50% 35%,
+          rgba(183, 255, 60, .07),
+          transparent 65%
+        ),
+        var(--bg);
+    }
+
+    .language-content {
+      width: 100%;
+      max-width: 760px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.12;
+      letter-spacing: -.04em;
+    }
+
+    .description {
+      max-width: 580px;
+      margin: 18px auto 30px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .language-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .language-link {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 24px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .04);
+      font-size: .9rem;
+      font-weight: 700;
+      transition:
+        background .2s,
+        color .2s,
+        border-color .2s,
+        transform .2s;
+    }
+
+    .language-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #10120a;
+    }
+
+    /* =========================
+       PIE DE PÁGINA
+    ========================= */
+
+    .site-footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .footer-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+    }
+
+    /* =========================
+       DISEÑO RESPONSIVE
+    ========================= */
+
+    @media (max-width: 640px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .header-inner {
+        min-height: 68px;
+      }
+
+      .brand img {
+        width: 125px;
+      }
+
+      .language-section {
+        padding: 55px 0;
+      }
+
+      .description {
+        font-size: .9rem;
+      }
+
+      .language-links {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 300px;
+        margin-inline: auto;
+      }
+
+      .language-link {
+        width: 100%;
+      }
+
+      .footer-text {
+        font-size: .75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>¡Welcome to Ya! Music Chris!</h1>
-<p>Selecciona tu idioma / Choose your language:</p>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="./" aria-label="Ya! Music Chris - Inicio">
+        <img
+          src="https://yamusicchris.github.io/icon.png"
+          alt="Ya! Music Chris"
+          width="148"
+          height="44"
+        >
+      </a>
+    </div>
+  </header>
 
-<div>
-    <button onclick="window.location.href='https://YaMusicChris.github.io/ES/'">Español 🇲🇽</button>
-    <button onclick="window.location.href='https://YaMusicChris.github.io/EN/'">English 🇺🇸</button>
-</div>
+  <main class="language-section">
+    <section class="language-content container" aria-labelledby="page-title">
 
-<script>
-    // Detecta el idioma del navegador
-    const userLang = navigator.language || navigator.userLanguage; // ej: "es-MX" o "en-US"
-    
-    if(userLang.startsWith('es')){
-        window.location.href = 'https://YaMusicChris.github.io/ES/';
-    } else if(userLang.startsWith('en')){
-        window.location.href = 'https://YaMusicChris.github.io/EN/';
-    }
-    // Si no es español ni inglés, deja que el usuario elija manualmente
-</script>
+      <p class="eyebrow">
+        Welcome | Bienvenidos
+      </p>
+
+      <h1 id="page-title">
+        Select your Language<br>
+        Selecciona tu Idioma
+      </h1>
+      
+      <p class="description">
+        If it wasn't detected automatically, select it manually.
+        <br>
+        Si no se detectó automáticamente, selecciónalo manualmente.
+      </p>
+
+      <nav class="language-links" aria-label="Language selection">
+
+        <a
+          class="language-link"
+          href="https://yamusicchris.github.io/EN/"
+          lang="en"
+          hreflang="en"
+          aria-label="Continue in English"
+        >
+          English 🇺🇸
+        </a>
+
+        <a
+          class="language-link"
+          href="https://yamusicchris.github.io/ES/"
+          lang="es"
+          hreflang="es"
+          aria-label="Continuar en español"
+        >
+          Español 🇲🇽
+        </a>
+
+      </nav>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">
+        © <span id="current-year">2026</span> ChrisWorld™. 
+        All rights reserved. |
+        Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
+      
+      // Detects the browser language
+const userLang = navigator.language || navigator.userLanguage;
+
+if (userLang.startsWith('es')) {
+    window.location.href = 'https://YaMusicChris.github.io/ES/';
+} else if (userLang.startsWith('en')) {
+    window.location.href = 'https://YaMusicChris.github.io/EN/';
+} else {
+    // Error when a supported language cannot be detected
+    console.error(
+        '%cSYSTEM ERROR',
+        'color: red; font-size: 24px; font-weight: bold;'
+    );
+
+    console.error(
+        'The browser language could not be detected automatically.'
+    );
+}
+  </script>
 
 </body>
 </html>
